@@ -1,0 +1,218 @@
+# search.py
+# ---------
+# Thông tin Cấp phép: Bạn có thể tự do sử dụng hoặc mở rộng các dự án này cho
+# mục đích giáo dục với điều kiện (1) bạn không phân phối hoặc xuất bản
+# giải pháp, (2) bạn giữ lại thông báo này và (3) bạn cung cấp rõ ràng
+# ghi công cho UC Berkeley, bao gồm một liên kết tới http://ai.berkeley.edu.
+#
+# Thông tin phân bổ: Các dự án Pacman AI được phát triển tại UC Berkeley.
+# Các dự án cốt lõi và trình giao dịch tự động chủ yếu được tạo bởi John DeNero
+# (denero@cs.berkeley.edu) và Dan Klein (klein@cs.berkeley.edu).
+# Tự động đăng ký phía sinh viên đã được thêm bởi Brad Miller, Nick Hay và
+# Pieter Abbeel (pabbeel@cs.berkeley.edu).
+
+
+"" "
+Trong search.py, bạn sẽ triển khai các thuật toán tìm kiếm chung được gọi bằng
+Tác nhân Pacman (trong searchAgents.py).
+"" "
+
+nhập khẩu  sử dụng
+
+
+ Tìm kiếm lớp
+    "" "
+    Lớp này phác thảo cấu trúc của một vấn đề tìm kiếm, nhưng không triển khai
+    bất kỳ phương thức nào (trong thuật ngữ hướng đối tượng: một lớp trừu tượng).
+    Bạn không cần phải thay đổi bất cứ điều gì trong lớp học này, bao giờ hết.
+    "" "
+
+    def  getStartState ( self ):
+        "" "
+        Trả về trạng thái bắt đầu cho vấn đề tìm kiếm.
+        "" "
+        sử dụng . raiseNotDefined ()
+
+    def  isGoalState ( self , state ):
+        "" "
+          trạng thái: Trạng thái tìm kiếm
+        Trả về True nếu và chỉ khi trạng thái là trạng thái mục tiêu hợp lệ.
+        "" "
+        sử dụng . raiseNotDefined ()
+
+    def  getSuccessors ( self , state ):
+        "" "
+          trạng thái: Trạng thái tìm kiếm
+        Đối với một trạng thái nhất định, điều này sẽ trả về một danh sách các bộ ba, (kế tiếp,
+        action, stepCost), trong đó 'kế nhiệm' là kế thừa cho hiện tại
+        trạng thái, 'action' là hành động bắt buộc để đến đó và 'stepCost' là
+        chi phí gia tăng của việc mở rộng sang người kế nhiệm đó.
+        "" "
+        sử dụng . raiseNotDefined ()
+
+    def  getCostOfActions ( tự , hành động ):
+        "" "
+         hành động: Danh sách các hành động cần thực hiện
+        Phương thức này trả về tổng chi phí của một chuỗi hành động cụ thể.
+        Trình tự phải bao gồm các nước đi hợp pháp.
+        "" "
+        sử dụng . raiseNotDefined ()
+
+
+def  tinyMazeSearch ( sự cố ):
+    "" "
+    Trả về một chuỗi các bước di chuyển giải được tinyMaze. Đối với bất kỳ mê cung nào khác,
+    trình tự di chuyển sẽ không chính xác, vì vậy chỉ sử dụng điều này cho tinyMaze.
+    "" "
+    từ  Chỉ đường nhập trò chơi  
+    s  =  Chỉ đường . MIỀN NAM
+    w  =  Chỉ đường . HƯỚNG TÂY
+    return [ s , s , w , s , w , w , s , w ]
+
+
+def  depthFirstSearch ( sự cố ):
+    "" "
+    Tìm kiếm các nút sâu nhất trong cây tìm kiếm trước.
+    Thuật toán tìm kiếm của bạn cần trả lại danh sách các hành động đạt đến
+    ghi bàn. Đảm bảo triển khai thuật toán tìm kiếm đồ thị.
+    Để bắt đầu, bạn có thể muốn thử một số lệnh đơn giản sau để
+    hiểu vấn đề tìm kiếm đang được chuyển vào:
+    print "Start:", problem.getStartState ()
+    print "Khởi đầu có phải là mục tiêu không?", problem.isGoalState (problem.getStartState ())
+    print "Những người kế nhiệm của Start:", problem.getSuccessors (problem.getStartState ())
+    "" "
+    "*** MÃ CỦA BẠN TẠI ĐÂY ***"
+
+    nodeStack  =  sử dụng . Ngăn xếp ()
+    nodeStack . push (( sự cố . getStartState (), []))
+    oldNode  =  set ()
+
+    trong khi  không phải  nodeStack . isEmpty ():
+
+        currentNodeState , di chuyển  =  nodeStack . pop ()
+
+        if ( currentNodeState  không  ở  oldNode ):
+            oldNode . thêm ( currentNodeState )
+
+            if ( sự cố . isGoalState ( currentNodeState )):
+                 di chuyển trở lại
+
+            khác :
+                cho  vấn đề tiếp  theo  . getSuccessors ( currentNodeState ):
+                    nodeStack . đẩy (( tiếp theo [ 0 ], di chuyển  + [ tiếp theo [ 1 ]]))
+
+     di chuyển trở lại
+
+    sử dụng . raiseNotDefined ()
+
+
+def  breadthFirstSearch ( sự cố ):
+    "" "Tìm kiếm các nút nông nhất trong cây tìm kiếm." ""
+    "*** MÃ CỦA BẠN TẠI ĐÂY ***"
+
+    nodeQueue  =  dùng . Hàng đợi ()
+    nodeQueue . push (( sự cố . getStartState (), []))
+    oldNode  =  set ()
+
+    trong khi  không phải  nodeQueue . isEmpty ():
+
+        currentNodeState , di chuyển  =  nodeQueue . pop ()
+
+        if ( currentNodeState  không  ở  oldNode ):
+            oldNode . thêm ( currentNodeState )
+
+            if ( sự cố . isGoalState ( currentNodeState )):
+                 di chuyển trở lại
+
+            khác :
+                cho  vấn đề tiếp  theo  . getSuccessors ( currentNodeState ):
+                    nodeQueue . đẩy (( tiếp theo [ 0 ], di chuyển  + [ tiếp theo [ 1 ]]))
+
+     di chuyển trở lại
+
+    sử dụng . raiseNotDefined ()
+
+
+def  đồng phụcCostSearch ( vấn đề ):
+    "" "Tìm kiếm nút có tổng chi phí ít nhất trước." ""
+    "*** MÃ CỦA BẠN TẠI ĐÂY ***"
+
+    nodePutorQueue  =  dùng . PriorityQueue ()
+
+    nodePinentQueue . push (( sự cố . getStartState (), [], 0 ), 0 )
+    oldNode  = {}
+
+    trong khi  không phải là  nodePosystemQueue . isEmpty ():
+
+        currentNodeState , di chuyển , chi phí  =  nodePosystemQueue . pop ()
+
+        if (( currentNodeState  không  ở  oldNode ) hoặc ( cost  <  oldNode [ currentNodeState ])):
+            oldNode [ currentNodeState ] =  chi phí
+
+            if ( sự cố . isGoalState ( currentNodeState )):
+                 di chuyển trở lại
+
+            khác :
+                cho  vấn đề tiếp  theo  . getSuccessors ( currentNodeState ):
+                    nodePinentQueue . cập nhật (
+                        ( tiếp theo [ 0 ], di chuyển  + [ tiếp theo [ 1 ]], chi phí  +  tiếp theo [ 2 ]), chi phí  +  tiếp theo [ 2 ])
+
+     di chuyển trở lại
+
+    sử dụng . raiseNotDefined ()
+
+
+def  nullHeuristic ( trạng thái , vấn đề = Không có ):
+    "" "
+    Một hàm heuristic ước tính chi phí từ trạng thái hiện tại đến gần nhất
+    mục tiêu trong SearchProblem được cung cấp. Kinh nghiệm này là tầm thường.
+    "" "
+    trả về  0
+
+
+def  aStarSearch ( problem , heuristic = nullHeuristic ):
+    "" "Tìm kiếm nút có chi phí kết hợp thấp nhất và tính toán kinh nghiệm đầu tiên." ""
+    "*** MÃ CỦA BẠN TẠI ĐÂY ***"
+
+    nodePutorQueue  =  dùng . PriorityQueue ()
+
+    nodePinentQueue . push (( sự cố . getStartState (), [], 0 ), 0 )
+    oldNode  =  set ()
+
+    trong khi  không phải là  nodePosystemQueue . isEmpty ():
+
+        currentNodeState , di chuyển , chi phí  =  nodePosystemQueue . pop ()
+
+        oldNode . thêm (( currentNodeState , chi phí ))
+
+        if ( sự cố . isGoalState ( currentNodeState )):
+             di chuyển trở lại
+        khác :
+
+            cho  vấn đề tiếp  theo  . getSuccessors ( currentNodeState ):
+
+                _move  =  move  + [ tiếp theo [ 1 ]]
+                _cost  =  vấn đề . getCostOfActions ( _move )
+                _node  = ( tiếp theo [ 0 ], _move , _cost )
+
+                kiểm tra  =  Sai
+
+                cho  cũ  trong  oldNode :
+                    if ( next [ 0 ] ==  old [ 0 ] và  _cost  > =  old [ 1 ]):
+                        kiểm tra  =  Đúng
+
+                nếu ( không  kiểm tra ):
+                    nodePinentQueue . đẩy (
+                        _node , _cost  +  heuristic ( tiếp theo [ 0 ], sự cố ))
+                    oldNode . thêm (( tiếp theo [ 0 ], _cost ))
+
+     di chuyển trở lại
+
+    sử dụng . raiseNotDefined ()
+
+
+# Các từ viết tắt
+bfs  =  breadthFirstSearch
+dfs  =  depthFirstSearch
+astar  =  aStarSearch
+ucs  =  UniformCostSearch
